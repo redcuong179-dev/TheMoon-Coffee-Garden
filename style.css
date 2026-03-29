@@ -283,7 +283,7 @@ h1, h2, h3, .display {
 /* Menu Grid */
 .menu-tabs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 4rem;
     margin-top: 4rem;
 }
@@ -387,16 +387,45 @@ h1, h2, h3, .display {
 .menu-list-jp li {
     list-style: none;
     display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
+    align-items: baseline;
+    padding: 1.25rem 0;
     border-bottom: 1px solid rgba(26, 26, 26, 0.05);
     font-family: 'Manrope', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-list-jp li span:first-child {
+    z-index: 1;
+    background: white;
+    padding-right: 10px;
+    position: relative;
 }
 
 .menu-list-jp .price {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--jp-red);
+    flex-shrink: 0;
+    z-index: 1;
+    background: white;
+    padding-left: 10px;
+    margin-left: auto;
+}
+
+.menu-list-jp li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.35rem;
+    border-bottom: 2px dotted rgba(26, 26, 26, 0.1);
+    z-index: 0;
+}
+
+.highlight-card .menu-list-jp .price,
+.highlight-card .menu-list-jp li span:first-child {
+    background: white; /* Ensure white background even in highlight card to cover dots */
 }
 
 /* --- Zalo Floating Plugin --- */
@@ -520,6 +549,24 @@ h1, h2, h3, .display {
     margin-top: 1rem;
 }
 
+.map-container {
+    margin: 2.5rem 0;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+    box-shadow: 10px 10px 0px var(--primary-base);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.map-container:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 13px 13px 0px var(--jp-red);
+}
+
+.map-container iframe {
+    display: block;
+    filter: grayscale(0.2) contrast(1.1);
+}
+
 .reservation-form {
     margin-top: 3rem;
 }
@@ -584,4 +631,21 @@ h1, h2, h3, .display {
 @media (max-width: 768px) {
     .editorial-gallery { grid-template-columns: 1fr; }
     .gallery-column:last-child { grid-column: span 1; }
+    .display { font-size: 3.5rem; }
+    .menu-tabs { gap: 2rem; }
+    .category-card-jp { padding: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 1.5rem; }
+    .menu-list-jp li { 
+        padding: 1rem 0;
+        font-size: 0.9375rem; 
+    }
+    .display { font-size: 2.8rem; }
+    .logo { font-size: 1.5rem; }
+    .btn { padding: 0.8rem 1.5rem; font-size: 0.8rem; }
+    .reserve-frame { padding: 2rem 1.5rem; }
+    .map-container { margin: 1.5rem 0; }
+    .map-container iframe { height: 250px; }
 }
